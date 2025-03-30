@@ -1,11 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="app.olauncher.ultra">
+    xmlns:tools="http://schemas.android.com/tools">
+    <!-- Remove package="app.olauncher.ultra" from here -->
 
     <uses-permission android:name="android.permission.EXPAND_STATUS_BAR" />
-    <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES" />
+    <!--suppress DeprecatedClassUsageInspection -->
+    <uses-permission android:name="android.permission.GET_TASKS" />
+    <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES"
+        tools:ignore="QueryAllPackagesPermission" />
     <!--For opening alarm app-->
     <uses-permission android:name="com.android.alarm.permission.SET_ALARM" />
+
+    <!-- Permission required for NotificationListenerService -->
+    <uses-permission
+        android:name="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE"
+        tools:ignore="ProtectedPermissions" />
 
     <application
         android:allowBackup="true"
@@ -17,10 +26,11 @@
         <activity
             android:name=".MainActivity"
             android:excludeFromRecents="true"
+            android:exported="true"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:taskAffinity=""
-            android:theme="@android:style/Theme.Wallpaper.NoTitleBar"
+            android:theme="@android:style/Theme.Black.NoTitleBar"
             android:windowSoftInputMode="stateHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -34,6 +44,7 @@
         <activity
             android:name=".FakeHomeActivity"
             android:enabled="false"
+            android:exported="true"
             android:launchMode="singleTask"
             android:windowSoftInputMode="stateHidden">
             <intent-filter>
@@ -43,6 +54,17 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+
+        <!-- Declare the Notification Listener Service -->
+        <service
+            android:name=".NotificationListener"
+            android:label="Ultra Notification Listener"
+            android:permission="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.service.notification.NotificationListenerService" />
+            </intent-filter>
+        </service>
 
     </application>
 

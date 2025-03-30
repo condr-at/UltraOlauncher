@@ -3,7 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:animateLayoutChanges="true">
+    android:animateLayoutChanges="true"
+    android:paddingStart="24dp"
+    android:paddingEnd="24dp"
+    android:clipToPadding="false">
 
     <TextView
         android:id="@+id/app_name"
@@ -13,24 +16,38 @@
         android:lines="1"
         android:maxLines="1"
         android:paddingVertical="12dp"
-        android:paddingStart="24dp"
-        android:paddingEnd="12dp"
+        android:paddingEnd="16dp"
         android:shadowColor="#66000000"
         android:shadowDx="1"
         android:shadowDy="1"
         android:shadowRadius="1"
         android:textColor="@android:color/white"
         android:textSize="28sp"
-        tools:ignore="HardcodedText" />
+        tools:text="Application Name Very Long Example" />
 
     <TextView
         android:id="@+id/other_profile_indicator"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:layout_marginStart="10dp"
+        android:layout_gravity="center_vertical|start"
+        android:layout_marginStart="-14dp"
         android:text="-"
         android:textColor="@android:color/white"
-        tools:ignore="HardcodedText" />
+        android:textSize="20sp"
+        android:visibility="gone"
+        tools:ignore="HardcodedText"
+        tools:visibility="visible" />
+
+    <!-- Notification Badge View -->
+    <View
+        android:id="@+id/notification_badge"
+        android:layout_width="10dp"
+        android:layout_height="10dp"
+        android:layout_gravity="end|top"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="4dp"
+        android:background="@drawable/notification_badge"
+        android:visibility="gone"
+        tools:visibility="visible" />
 
 </FrameLayout>
